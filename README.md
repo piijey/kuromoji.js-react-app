@@ -128,28 +128,22 @@ module.exports = function override(config, env) {
 
 編集前
 ```json
-/* package.json */
-/* ...他の設定 */
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-/* ...他の設定 */
 ```
 
 👇**編集後**
 ```json
-/* package.json */
-/* ...他の設定 */
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test":  "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
-/* ...他の設定 */
 ```
 
 編集したら、`package-lock.json` を削除し、`npm install` と `npm start` を再実行します。
@@ -163,7 +157,7 @@ invalid file signature:60,33
     at xhr.onload (http://localhost:3000/static/js/bundle.js:13528:26)
 ```
 
-ブラウザの開発者ツールの “Network”タブを確認すると、`/kuromoji-dict/base.dat.gz` などの辞書ファイルの Status が “304” となっていることがわかります。辞書ファイルにアクセスできていないようです。
+ブラウザの開発者ツールの "Network"タブを確認すると、`/kuromoji-dict/base.dat.gz` などの辞書ファイルの Status が "304" となっていることがわかります。辞書ファイルにアクセスできていないようです。
 
 npm でインストールした `kuromoji/dict/` 下のファイルを、ブラウザがアクセスできる `public/` 下に配置します。次のようにディレクトリごとコピーしました。
 
@@ -173,9 +167,11 @@ cp -r node_modules/kuromoji/dict public/kuromoji-dict
 
 *※辞書ファイルはgzip形式（.gz拡張子）で圧縮されていますが、我々が手作業で解凍する必要はありません。*
 
-辞書ファイルを配置したパスと、`src/App.js` で指定したパス `dicPath: "/kuromoji-dict/"` が一致していることを確認します。辞書ファイルにアクセスできていれば、ブラウザの開発者ツールの “Network”タブで辞書ファイルの Status が “200” になります。
+辞書ファイルを配置したパスと、`src/App.js` で指定したパス `dicPath: "/kuromoji-dict/"` が一致していることを確認します。辞書ファイルにアクセスできていれば、ブラウザの開発者ツールの "Network"タブで辞書ファイルの Status が "200" になります。
 
 ## 以上です
 形態素解析を活用して楽しいアプリを開発しましょう。
+
+Qiita で記事を公開しました。[React + Kuromoji.js で形態素解析（Webpackの設定と辞書ファイルの配置） #React - Qiita](https://qiita.com/piijey/items/a7ff20da2f7d7315abb0)
 
 ![](./docs/screenshot_thanks.png)
