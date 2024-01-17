@@ -6,6 +6,11 @@
 ![](./docs/screenshot_success.png)
 今回アプリを作るにあたり、**Webpackの設定**と**辞書ファイルの配置** でちょっと困ったので、メモを残しておきます。
 
+## 履歴
+- 2024/1/17 少し速くなりました。(refactor: Initialize kuromoji tokenizer only once at app mount)
+- 2024/1/11 Qiita で記事を公開しました。[React + Kuromoji.js で形態素解析（Webpackの設定と辞書ファイルの配置） #React - Qiita](https://qiita.com/piijey/items/a7ff20da2f7d7315abb0)
+
+
 ## 準備
 `nodejs 20.8.1` を使用しています。
 
@@ -21,70 +26,9 @@ npm i --save-dev @types/kuromoji
 ```
 
 ## Reactアプリを作る
- `src/App.js` は、次のように書きました。
+[`src/App.js`](./src/App.js) をご参照ください。
 
-```js
-// src/App.js
-import React, { useState } from 'react';
-import './App.css';
-var kuromoji = require("kuromoji");
-
-function App() {
-  const [userInputText, setUserInputText] = useState("");
-  const [tokens, setTokens] = useState([]);
-
-  function analyze(event) {
-    event.preventDefault();  // デフォルトのフォーム送信を阻止
-    const formData = new FormData(event.target);
-    const text = formData.get("text");
-
-    // kuromojiを使ってテキストをトークナイズ
-    kuromoji.builder({ dicPath: "/kuromoji-dict/" }).build(function (err, tokenizer) { //dicPathで辞書のディレクトリを指定
-      const path = tokenizer.tokenize(text);
-      setTokens(path); // トークンの結果をステートにセット
-    });
-
-    setUserInputText(text);
-  }
-
-  return (
-    <div className='App'>
-      <div className="card p-2 align-items-center">
-        <form onSubmit={analyze}>
-          <input name="text" type="text" placeholder="テキストを入力します"/>
-          <button type="submit" className="btn btn-primary">Analyze</button>
-        </form>
-        <p>{userInputText}</p>
-        {/* トークンの情報を表形式で表示 */}
-        <table>
-          <thead>
-            <tr>
-              <th>開始位置</th>
-              <th>表層形</th>
-              <th>品詞</th>
-              <th>基本形</th>
-              <th>読み</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tokens.map((token, index) => (
-              <tr key={index}>
-                <td>{token.word_position}</td>
-                <td>{token.surface_form}</td>
-                <td>{token.pos}</td>
-                <td>{token.basic_form}</td>
-                <td>{token.reading}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-export default App;
-```
+[Qiita記事](https://qiita.com/piijey/items/a7ff20da2f7d7315abb0) では、Analyze を実行するたびにトークナイザを初期化していましたが、最新版ではアプリのマウント時に一度だけトークナイザを初期化しているので、少し速くなっています。
 
 ## Webpack の設定
 `npm start` で開発用サーバを起動したところ、次のようなエラーが出ました。
@@ -171,7 +115,5 @@ cp -r node_modules/kuromoji/dict public/kuromoji-dict
 
 ## 以上です
 形態素解析を活用して楽しいアプリを開発しましょう。
-
-Qiita で記事を公開しました。[React + Kuromoji.js で形態素解析（Webpackの設定と辞書ファイルの配置） #React - Qiita](https://qiita.com/piijey/items/a7ff20da2f7d7315abb0)
 
 ![](./docs/screenshot_thanks.png)

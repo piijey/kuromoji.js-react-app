@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 var kuromoji = require("kuromoji");
 
 function App() {
   const [userInputText, setUserInputText] = useState("");
   const [tokens, setTokens] = useState([]);
+  const [tokenizer, setTokenizer] = useState(null);
+
+  useEffect(() => { //アプリのマウント時にkuromojiトークナイザを初期化
+    kuromoji.builder({ dicPath: "/kuromoji-dict/" }).build(function (err, buildTokenizer) { //dicPathで辞書のディレクトリを指定
+      if (err) {
+        console.log(err);
+      } else {
+        setTokenizer(buildTokenizer);
+      }
+    });
+  }, []);
 
   function analyze(event) {
     event.preventDefault();  // デフォルトのフォーム送信を阻止
+    if (!tokenizer) {
+      console.error("トークナイザが利用できません");
+      return
+    }
+
     const formData = new FormData(event.target);
     const text = formData.get("text");
+    setUserInputText(text); // 入力されたテキストをステートにセット
 
     // kuromojiを使ってテキストをトークナイズ
-    kuromoji.builder({ dicPath: "/kuromoji-dict/" }).build(function (err, tokenizer) { //dicPathで辞書のディレクトリを指定
-      const path = tokenizer.tokenize(text);
-      setTokens(path); // トークンの結果をステートにセット
-    });
-
-    setUserInputText(text); // 入力されたテキストをステートにセット
+    const path = tokenizer.tokenize(text);
+    setTokens(path); // トークナイズ結果をステートにセット
   }
 
   return (
