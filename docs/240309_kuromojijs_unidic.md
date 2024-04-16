@@ -187,7 +187,7 @@ kuromoji.builder({ dicPath: process.env.PUBLIC_URL + "/kuromoji-dict-unidic/" })
 
 - React で kuromoji.js を利用する際のセットアップについては、以前の記事 [React + Kuromoji.js で形態素解析（Webpackの設定と辞書ファイルの配置） #React - Qiita](https://qiita.com/piijey/items/a7ff20da2f7d7315abb0) に書きました
 
-![ブラウザアプリのスクショ、「形態/素/解析/でき/た/ぞ〜（ケイタイ/ソ/カイセキ/デキ/タ/ゾオ）」](./screenshot_success_unidic.png)
+![ブラウザアプリのスクショ、「形態/素/解析/でき/た/ぞ〜（ケイタイ/ソ/カイセキ/デキ/タ/ゾオ）」](./fig/screenshot_success_unidic.png)
 
 
 **成功です！**
@@ -211,4 +211,4 @@ kuromoji.builder({ dicPath: process.env.PUBLIC_URL + "/kuromoji-dict-unidic/" })
 
 少々精度を犠牲にしてでも、 `matrix.def` を切り詰めてデータ量を削減するか。スマホで動かすための追加の対処は、今後の課題とします（アイデアをお持ちの方、教えてください〜！）。
 
-![ブラウザアプリのスクショ、「お/読み/いただき/ありがとう/ござい/まし/た/。（オ/ヨミ/イタダキ/アリガトウ/ゴザイ/マシ/タ/。）」](./screenshot_thanks_unidic.png)
+![ブラウザアプリのスクショ、「お/読み/いただき/ありがとう/ござい/まし/た/。（オ/ヨミ/イタダキ/アリガトウ/ゴザイ/マシ/タ/。）」](./fig/screenshot_thanks_unidic.png)
