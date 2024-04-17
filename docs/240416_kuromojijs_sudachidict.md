@@ -189,9 +189,9 @@ kuromoji.builder({ dicPath: process.env.PUBLIC_URL + "/kuromoji-dict-sudachi/" }
 
 | 辞書 | 語彙数<br>(csvファイルの行数) | matrix.def<br>size | ビルド後<br>*.dat.gz size 合計 | tokenizer<br>ロード時間<br>PC | tokenizer<br>ロード時間<br>スマホ |
 |:--|--:|--:|--:|--:|--:|
-| **IPADic** | 392,126 | 22M | 17M | 0.8 秒 | 10 秒 |
-| **SudachiDict** | 765,613 | 491M | 49M | 1.9 秒 | 30 秒|
-| **UniDic** | 876,803 | 59G | 480M | 13 秒 | エラー |
+| **IPADic** | 392,126 | 22MB | 17MB | 0.8 秒 | 10 秒 |
+| **SudachiDict** | 765,613 | 491MB | 49M | 1.9 秒 | 30 秒|
+| **UniDic** | 876,803 | 5.9GB | 480MB | 13 秒 | エラー |
 
 **語彙数とファイルサイズ**  
 語彙数の増加に伴い、特に接続コストファイル (matrix.def) のサイズが大きく増加します。 SudachiDict と UniDic は語彙数が近いにも関わらず、接続コストファイルのサイズに桁違いの差があります。
