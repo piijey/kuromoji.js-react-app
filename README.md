@@ -23,8 +23,15 @@ npm start
 ```
 
 
-## 形態素解析用の辞書のビルド
+## 形態素解析用の辞書のビルド・セットアップ
 - Node.js v10
+
+## IPADic
+npm でインストールした `kuromoji/dict/` 下のファイルを、 `public/` 下にディレクトリごとコピーする
+```sh
+cp -r node_modules/kuromoji/dict public/kuromoji-dict
+```
+
 
 ## UniDic
 - [「UniDic」国語研短単位自動解析用辞書 | バックナンバー](https://clrd.ninjal.ac.jp/unidic/back_number.html#unidic_cwj) から、フルパッケージ版 `unidic-cwj-202302_full.zip` をダウンロードして、 `./unidic-cwj-202302_full` に展開する
